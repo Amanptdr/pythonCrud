@@ -14,7 +14,10 @@ class HomeView(APIView):
        content = {'message': 'Welcome to the JWT Authentication page using React Js and Django!'}
        return Response(content)
 
-
+class Testing(APIView):
+   def get(self, request):
+       content = {'message': 'THIS IS AMAN ','id':1}
+       return Response(content)
 class LogoutView(APIView):
      permission_classes = (IsAuthenticated,)
      def post(self, request):

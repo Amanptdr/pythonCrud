@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
+# Amanptdr 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
 
 from pathlib import Path
 from datetime import timedelta
