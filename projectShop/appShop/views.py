@@ -8,6 +8,8 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from .serializers import UserRegistrationSerializer,MyTokenObtainPairSerializer,RegisterSerializer
 from rest_framework import generics
 from django.contrib.auth.models import User
+from django.views.decorators.csrf import csrf_exempt
+
 class HomeView(APIView):
      
    permission_classes = (IsAuthenticated, )
@@ -24,7 +26,7 @@ class MyObtainTokenPairView(TokenObtainPairView):
     permission_classes = (AllowAny,)
     serializer_class = MyTokenObtainPairSerializer
 
-
+@csrf_exempt
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
     permission_classes = (AllowAny,)

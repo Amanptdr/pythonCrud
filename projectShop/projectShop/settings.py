@@ -55,7 +55,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-
 ]
 CORS_ORIGIN_ALLOW_ALL = True
 REST_FRAMEWORK = {
@@ -71,6 +70,11 @@ SIMPLE_JWT = {
 }
 ROOT_URLCONF = 'projectShop.urls'
 ALLOWED_HOSTS = ['*']
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:3000'
+]
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
