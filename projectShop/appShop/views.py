@@ -26,7 +26,6 @@ class MyObtainTokenPairView(TokenObtainPairView):
     permission_classes = (AllowAny,)
     serializer_class = MyTokenObtainPairSerializer
 
-@csrf_exempt
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
     permission_classes = (AllowAny,)
