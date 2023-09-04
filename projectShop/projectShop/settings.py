@@ -26,6 +26,8 @@ SECRET_KEY = 'django-insecure-@rlgr+eukjoir5gks3(zb90*&)@n&a_9i*^6)c3wym_b0vh)%_
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
+# DEBUG = False
+
 
 # ALLOWED_HOSTS = []
 
@@ -69,7 +71,7 @@ SIMPLE_JWT = {
      'BLACKLIST_AFTER_ROTATION': True
 }
 ROOT_URLCONF = 'projectShop.urls'
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*','localhost',]
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:3000'
 ]

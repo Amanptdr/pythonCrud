@@ -24,6 +24,14 @@ class Testing(APIView):
 
 class MyObtainTokenPairView(TokenObtainPairView):
     permission_classes = (AllowAny,)
+    # def getUserDetails(request):
+    #     username = request.POST["username"]
+    #     password = request.POST["password"]
+    #     userDetails = authenticate(request, username=username, password=password)
+    #     if user is not None:
+    #         return userDetails
+    #     else:
+    #         return None
     serializer_class = MyTokenObtainPairSerializer
 
 class RegisterView(generics.CreateAPIView):
