@@ -14,10 +14,10 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.contrib.auth.password_validation import validate_password
 from rest_framework.validators import UniqueValidator
 
-class UserRegistrationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = UserRegistration
-        fields = ['username','first_name','last_name', 'email', 'password']
+# class UserRegistrationSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = UserRegistration
+#         fields = ['username','first_name','last_name', 'email', 'password']
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
@@ -64,3 +64,8 @@ class RegisterSerializer(serializers.ModelSerializer):
         user.save()
 
         return user
+
+
+class LoginSerializer(serializers.Serializer):
+    username = serializers.CharField()
+    password = serializers.CharField(write_only=True)
