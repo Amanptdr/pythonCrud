@@ -3,12 +3,12 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.permissions import AllowAny
 from rest_framework_simplejwt.views import TokenObtainPairView
-from .serializers import LoginSerializer,MyTokenObtainPairSerializer,RegisterSerializer,UserSerializer
+from .serializers import LoginSerializer,MyTokenObtainPairSerializer,RegisterSerializer,UserSerializer,ArticleSerializer
 from rest_framework import generics
 from django.contrib.auth.models import User
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
-
+from .models import Artical
 class TokenValidationView(APIView):
     def post(self, request):
         token = request.data.get('token')
@@ -89,5 +89,24 @@ class RefreshTokenView(APIView):
         except Exception as e:
             return Response({'error': 'Invalid refresh token'}, status=status.HTTP_401_UNAUTHORIZED)
 
+
+class CreateArticalView(APIView):
+    permission_classes = (IsAuthenticated, )
+
+    def get(self, request):
+        articles = Artical.objects.all()
+        # the many param informs the serializer that it will be serializing more than a single article.
+        serializer = ArticleSerializer(articles, many=True)
+        return Response({"articles": serializer.data})
+
+    def post(self, request):
+        article = request.data
+        print(request.user.id,"111111111111111",article)
+        # Create an article from the above data
+        article['created_by'] = request.user.id
+        serializer = ArticleSerializer(data=article)
+        if serializer.is_valid(raise_exception=True):
+            article_saved = serializer.save()
+        return Response({"success": "Article '{}' created successfully".format(article_saved.title)})
 
 

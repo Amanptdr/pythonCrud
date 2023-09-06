@@ -12,4 +12,6 @@ urlpatterns = [
          path('login/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
       #    path('login/refresh/',views.RefreshTokenView.as_view(),name="token_refresh"),
          path('register/', views.RegisterView.as_view(), name='auth_register'),
+
+         path('create-artical/',views.CreateArticalView.as_view(),name='creat_artical')
          ]
