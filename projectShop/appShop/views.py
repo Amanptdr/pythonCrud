@@ -3,12 +3,11 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.permissions import AllowAny
 from rest_framework_simplejwt.views import TokenObtainPairView
-from .serializers import LoginSerializer,MyTokenObtainPairSerializer,RegisterSerializer
+from .serializers import LoginSerializer,MyTokenObtainPairSerializer,RegisterSerializer,UserSerializer
 from rest_framework import generics
 from django.contrib.auth.models import User
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
-
 
 class TokenValidationView(APIView):
     def post(self, request):
@@ -23,10 +22,17 @@ class TokenValidationView(APIView):
 class HomeView(APIView):
      
    permission_classes = (IsAuthenticated, )
-#    permission_classes = (TokenValidationView, )
    def get(self, request):
-       content = {'message': 'Welcome to the JWT Authentication page using React Js and Django!'}
-       return Response(content)
+    userId = request.user.id
+    data = User.objects.get(pk=request.user.id)
+    user_data = {
+        'id': data.id,
+        'username': data.username,
+        'email': data.email,
+        'first_name': data.first_name,
+        'last_name': data.last_name,
+        }
+    return Response(user_data)
 
 class Testing(APIView):
    def get(self, request):
