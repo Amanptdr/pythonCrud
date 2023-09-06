@@ -9,6 +9,8 @@ from django.contrib.auth.models import User
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
 from .models import Artical
+from rest_framework import status
+
 class TokenValidationView(APIView):
     def post(self, request):
         token = request.data.get('token')
@@ -101,12 +103,30 @@ class CreateArticalView(APIView):
 
     def post(self, request):
         article = request.data
-        print(request.user.id,"111111111111111",article)
-        # Create an article from the above data
         article['created_by'] = request.user.id
         serializer = ArticleSerializer(data=article)
         if serializer.is_valid(raise_exception=True):
             article_saved = serializer.save()
         return Response({"success": "Article '{}' created successfully".format(article_saved.title)})
+
+    def put(self, request, pk):
+        try:
+            instance = Artical.objects.get(pk=pk)
+        except Artical.DoesNotExist:
+            return Response({"error": "Resource not found"}, status=status.HTTP_404_NOT_FOUND)
+        print(type(request.user.id),"122222222222222222222")
+        # instance.created_by = "3"
+        serializer = ArticleSerializer(instance, data=request.data)  # Replace with your serializer class
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def delete(self, request, pk):
+        try:
+            artical = Artical.objects.get(pk=pk)
+        except Artical.DoesNotExist:
+            return Response({"error": "Resource not found"}, status=status.HTTP_404_NOT_FOUND)
+        artical.delete()
+        return Response({"message": "Article with id `{}` has been deleted.".format(pk)},status=204)
 
 

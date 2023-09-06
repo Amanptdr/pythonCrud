@@ -66,3 +66,12 @@ class ArticleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Artical
         fields = '__all__'
+    
+    # def update(self, instance, validated_data):
+    #     instance.title = validated_data.get('title', instance.title)
+    #     instance.message = validated_data.get('message', instance.message)
+    #     instance.created_by = validated_data.get('created_by', instance.created_by)
+    #     instance.created_at = validated_data.get('created_at', instance.created_at)
+
+    #     instance.save()
+    #     return instance
