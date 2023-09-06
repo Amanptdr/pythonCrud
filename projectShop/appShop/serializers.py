@@ -1,23 +1,9 @@
-
-# from django.db.models import fields
-# from rest_framework import serializers
-# from .models import Category
- 
-# class CategorySerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Category
-#         fields = ('category', 'subcategory', 'name', 'amount')
 from rest_framework import serializers
 from .models import UserRegistration
 from django.contrib.auth.models import User
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.contrib.auth.password_validation import validate_password
 from rest_framework.validators import UniqueValidator
-
-# class UserRegistrationSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = UserRegistration
-#         fields = ['username','first_name','last_name', 'email', 'password']
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
