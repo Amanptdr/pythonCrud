@@ -40,12 +40,21 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+        "daphne" ,
     'django.contrib.staticfiles',
     'rest_framework',
     'appShop.apps.AppshopConfig',
     'rest_framework_simplejwt.token_blacklist',
-    "corsheaders"   
+    "corsheaders",
+    "channels"
 ]
+ASGI_APPLICATION = 'projectShop.asgi.application'
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

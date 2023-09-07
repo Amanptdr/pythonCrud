@@ -10,6 +10,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
 from .models import Artical
 from rest_framework import status
+from django.db.models import Q
 
 class TokenValidationView(APIView):
     def post(self, request):
@@ -96,7 +97,9 @@ class CreateArticalView(APIView):
     permission_classes = (IsAuthenticated, )
 
     def get(self, request):
-        articles = Artical.objects.all()
+        # articles = Artical.objects.all()
+        articles = Artical.objects.filter(Q(created_by=request.user.id))
+
         # the many param informs the serializer that it will be serializing more than a single article.
         serializer = ArticleSerializer(articles, many=True)
         return Response({"articles": serializer.data})

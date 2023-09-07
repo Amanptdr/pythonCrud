@@ -27,6 +27,8 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('app/',include('appShop.urls')),
+    path("chat/", include("chat.urls")),
+
     # path('token/', 
     #       jwt_views.TokenObtainPairView.as_view(), 
     #       name ='token_obtain_pair'),
