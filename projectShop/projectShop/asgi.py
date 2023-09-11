@@ -17,7 +17,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'projectShop.settings')
 
 from channels.auth import AuthMiddlewareStack
 from channels.routing import ProtocolTypeRouter , URLRouter
-from chat import routing
+from appShop import routing
 application = get_asgi_application()
 
 application = ProtocolTypeRouter(

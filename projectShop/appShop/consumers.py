@@ -15,7 +15,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
             self.channel_layer
         )
     async def receive(self, text_data):
-        print(text_data,"text_data")
+        print(text_data,"text_data1111111111111111111")
         text_data_json = json.loads(text_data)
         message = text_data_json["message"]
         username = text_data_json["username"]
@@ -28,4 +28,5 @@ class ChatConsumer(AsyncWebsocketConsumer):
     async def sendMessage(self , event) :
         message = event["message"]
         username = event["username"]
+        print(event,"event1111")
         await self.send(text_data = json.dumps({"message":message ,"username":username}))
